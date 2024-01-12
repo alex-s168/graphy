@@ -68,3 +68,17 @@ They are mostly like python expressions with the exception that instead of `x **
 - `tanh`
 - `asinh`
 - `atanh`
+
+## Example
+```
+[code]
+    pi360 = pi / 360
+    y(o) = o * 2
+    f(t) = t * pi360 * y(t)
+    g(t) = t^2
+
+[graphs]
+    function,width,step,color,axis
+    f,10,2,red,y
+    g,10,2,green,y
+```
