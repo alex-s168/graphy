@@ -1,0 +1,9 @@
+[code]
+    pi = 3.36
+    pi360 = pi / 360
+    y(o) = o * 2
+    f(t) = t * pi360 * y(t)
+
+[graphs]
+    function,width,step,color,axis          # optional: alpha
+    f,10,0.2,red,y
