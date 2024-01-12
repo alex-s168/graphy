@@ -111,6 +111,7 @@ for graph in graphs:
 
     plt.plot(dx, dy, color=color, alpha=alpha, label=label)
 
+plt.legend()
 plt.show()
 
 print("Done!")
