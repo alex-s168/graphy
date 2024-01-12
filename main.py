@@ -1,3 +1,4 @@
+import math
 import sys
 import matplotlib.pyplot as plt
 
@@ -29,7 +30,29 @@ if "code" not in graphFileSections:
 
 # dict<name, <constantValue / functionObject, isConstant, functionArguments?>>
 decl = {}
-declPass = {}
+declPass = {
+    # constants
+    "pi": math.pi,
+    "tau": math.tau,
+    "e": math.e,
+
+    # functions
+    "sin": math.sin,
+    "cos": math.cos,
+    "tan": math.tan,
+    "asin": math.asin,
+    "acos": math.acos,
+    "atan": math.atan,
+    "sqrt": math.sqrt,
+    "exp": math.exp,
+    "log": math.log,
+    "log2": math.log2,
+    "sinh": math.sinh,
+    "cosh": math.cosh,
+    "tanh": math.tanh,
+    "asinh": math.asinh,
+    "atanh": math.atanh,
+}
 
 for line in graphFileSections["code"].splitlines():
     if len(line.strip()) == 0:
@@ -47,7 +70,7 @@ graphs = parse_data_ffm(graphFileSections["graphs"].splitlines())
 
 plt.rcParams["figure.autolayout"] = True
 
-print(f"Plotting {len(graphs)} graphs...")
+print(f"Plotting {len(graphs)} graph(s)...")
 
 for graph in graphs:
     fn = graph["function"]
@@ -71,21 +94,22 @@ for graph in graphs:
     color = graph["color"]
     axis = graph["axis"]
     alpha = float(graph["alpha"]) if "alpha" in graph else 1.0
+    label = graph["label"] if "label" in graph else None
 
     dx: list[float]
     dy: list[float]
 
     if axis == "x":
-        dx = [fptr(i * step) for i in range(int(width / step))]
-        dy = [i * step for i in range(int(width / step))]
+        dx = [fptr(i / step) for i in range(int(width * step))]
+        dy = [i / step for i in range(int(width * step))]
     elif axis == "y":
-        dx = [i * step for i in range(int(width / step))]
-        dy = [fptr(i * step) for i in range(int(width / step))]
+        dx = [i / step for i in range(int(width * step))]
+        dy = [fptr(i / step) for i in range(int(width * step))]
     else:
         print("Invalid axis!")
         sys.exit(1)
 
-    plt.plot(dx, dy, color=color, alpha=alpha)
+    plt.plot(dx, dy, color=color, alpha=alpha, label=label)
 
 plt.show()
 
